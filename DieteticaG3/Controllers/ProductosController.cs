@@ -13,6 +13,8 @@ namespace DieteticaG3.Controllers
 {
     public class ProductosController : Controller
     {
+
+
         private DieteticaEntities db = new DieteticaEntities();
 
         // GET: Productos
@@ -35,31 +37,6 @@ namespace DieteticaG3.Controllers
             }
             return View(producto);
         }
-
-        // GET: Productos/Create
-        /* public ActionResult Create()
-         {
-             return View();
-         }
-
-         // POST: Productos/Create
-         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-         [HttpPost]
-         [ValidateAntiForgeryToken]
-         public ActionResult Create([Bind(Include = "codigo,nombre,precio,stock")] Producto producto)
-         {
-             if (ModelState.IsValid)
-             {
-                 db.Producto.Add(producto);
-                 db.SaveChanges();
-                     return RedirectToAction("Index");
-             }
-
-             return View(producto);
-         }
-         */
-
         // GET: Productos/Edit/5
         public ActionResult Edit(int? id)
         {
