@@ -1,0 +1,121 @@
+﻿@model DieteticaG3.Models.DetalleViewModel
+
+@{
+    ViewBag.Title = "NuevoPedido";
+}
+
+<h2>NuevoPedido</h2>
+@using (Html.BeginForm("AgregarDetalle", "Pedidos", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.SelectedProductoId)
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.SelectedProductoId, ViewBag.productos as SelectList, "-- Seleccione producto --")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ValidationMessageFor(model => model.SelectedProductoId, null, new { @class = "text text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.cantidad)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.cantidad)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ValidationMessageFor(model => model.cantidad, null, new { @class = "text text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ValidationMessage("Error", null, new { @class = "text text-danger" })
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Agregar">
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(detalle => detalle.productoNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(detalle => detalle.precioUnitario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(detalle => detalle.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(detalle => detalle.totalDetalle)
+        </th>
+    </tr>
+    @if (ViewBag.detalles != null)
+    {
+        foreach (DieteticaG3.Models.DetalleViewModel detalleModel in ViewBag.detalles)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => detalleModel.productoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => detalleModel.precioUnitario)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => detalleModel.cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => detalleModel.totalDetalle)
+                </td>
+            </tr>
+        }
+    }
+</table>
+<div class="finish-buttons" style="display: inline-block;">
+    <table>
+        <tr>
+            <td>
+                @using (Html.BeginForm("ConfirmarPedido", "Pedidos", FormMethod.Post, new { @id = "Confirm" }))
+                {
+                    // <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                    <input id="button-confirm" type="submit" value="Confirmar">
+                }
+            </td>
+            <td>
+                @using (Html.BeginForm("CancelarPedido", "Pedidos", FormMethod.Post, new { @id = "Cancel" }))
+                {
+                    <input id="button-cancel" type="submit" value="Cancelar">
+                }
+            </td>
+        </tr>
+    </table>
+
+    @*confirmación de pedido*@
+    <script type="text/javascript">
+        $("body").on("submit", "#Confirm", function () {
+
+            return confirm("¿Desea confirmar el pedido?");
+        });
+    </script>
+    @*anulación de pedido*@
+    <script type="text/javascript">
+        $("body").on("submit", "#Cancel", function () {
+
+            return confirm("¿Desea cancelar el pedido?");
+        });
+    </script>
+</div>
+
+
+
+
+
+

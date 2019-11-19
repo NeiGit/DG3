@@ -1,0 +1,37 @@
+﻿@if (Session["Dni"] == null)
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Registrar", "Registrar", "Clientes")
+        </li>
+        <li>
+            @Html.ActionLink("Login", "Login", "Clientes")
+        </li>
+
+    </ul>
+}
+else
+{
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        @Html.Label("Bienvenide " + Session["Nombre"])
+    </li>
+    @if (Session["Dni"].Equals("0"))
+    {
+        <li>
+            @Html.ActionLink("ABM productos", "Index", "Productos")
+        </li>
+    }
+    else
+    {
+        <li>
+            @Html.ActionLink("Pedido", "Index", "Pedidos")
+        </li>
+    }
+    <li>
+        @Html.ActionLink("Cerrar sesión", "Logout", "Clientes")
+    </li>
+
+</ul>
+}
+

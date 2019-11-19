@@ -1,0 +1,50 @@
+﻿@model DieteticaG3.Models.PedidoModel
+
+@{
+    ViewBag.Title = "PedidoIndex";
+}
+
+<h2>Pedido</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(pedido => pedido.numPed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(pedido => pedido.PedFec)
+        </th>
+        <th>
+            @Html.DisplayNameFor(pedido => pedido.PrecioTotal)
+        </th>
+    </tr>
+
+    @foreach (DieteticaG3.Models.PedidoModel pedido in @ViewBag.pedidosDeCliente)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => pedido.numPed)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => pedido.PedFec)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => pedido.PrecioTotal)
+    </td>
+    <td>
+        @Html.ActionLink("Ver", "Details", new { id = pedido.numPed })
+    </td>
+   
+</tr>
+        
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Nuevo pedido", "NuevoPedido")
+    
+</p>
+   
+
+

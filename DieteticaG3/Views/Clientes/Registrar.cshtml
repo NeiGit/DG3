@@ -1,0 +1,221 @@
+﻿@model DieteticaG3.Models.ClienteModel
+@{
+    ViewBag.Title = "Registrar";
+}
+<h1>Registrar nuevo cliente</h1>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Registro</title>
+
+
+    <link rel="stylesheet" href="~/Content/animate.css">
+    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Content/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/aos.css">
+    <link rel="stylesheet" href="~/Content/ionicons.min.css">
+    <link rel="stylesheet" href="~/Content/flaticon.css">
+    <link rel="stylesheet" href="~/Content/icomoon.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/flaticon.css" />
+
+
+</head>
+
+<body>
+
+    <fieldset>
+
+        <br />
+
+        @using (Html.BeginForm("Registrar", "Clientes", FormMethod.Post, new { @id = "Registrar" }))
+        {
+            <table>
+                <tr>
+                    <td>
+
+                        <div class="form-group">
+                            <div class="form-wrapper">
+                                @Html.LabelFor(m => m.Nombre)
+                                @Html.TextBoxFor(m => m.Nombre)
+                                <div id="first_name_error" class="validation_error"></div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Nombre, null, new { @class = "text text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <div class="form-wrapper">
+                                @Html.LabelFor(m => m.Apellido)
+                                @Html.TextBoxFor(m => m.Apellido)
+                                <div id="last_name_error" class="validation_error"></div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Apellido, null, new { @class = "text text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <div class="form-wrapper">
+                                @Html.LabelFor(m => m.Dni)
+                                @Html.TextBoxFor(m => m.Dni)
+                                <div id="dni" class="validation_error"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Dni, null, new { @class = "text text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <div class="form-wrapper">
+                                @Html.LabelFor(m => m.Email)
+                                @Html.TextBoxFor(m => m.Email, new {@title = "Email" })
+                                <div id="email_error" class="validation_error"></div>
+                            </div>
+                        </div>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <div class="form-wrapper">
+                                @Html.LabelFor(m => m.Password)
+                                @Html.PasswordFor(m => m.Password, new {@title = "Password" })
+                                <div id="password_error" class="validation_error"></div>
+                            </div>
+                        </div>
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text text-danger" })
+                    </td>
+                </tr>
+                <tr>
+
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <div class="form-wrapper">
+                                @Html.LabelFor(m => m.PasswordConfirm)
+                                @Html.PasswordFor(m => m.PasswordConfirm, new {@title = "PasswordConfirm"})
+                                <div id="pasword_confirm_error" class="validation_error"></div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.PasswordConfirm, null, new { @class = "text text-danger" })
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <label>
+                            @Html.LabelFor(m => m.TermsAndCond)
+                            @Html.CheckBoxFor(m => m.TermsAndCond, new { @title = "TermsAndCond" })
+                            @*<input id="check_terms_and_conditions" type="checkbox" name="terms_and_conditions" class="form-control"> Acepto los términos y condiciones de uso*@
+                            <br />
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <input type="submit" value="Registrar" onclick="validate()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessage("Error", null, new { @class = "text text-danger" })
+                    </td>
+                </tr>
+            </table>
+        }
+    </fieldset>
+
+
+    @*Validaciones del lado del cliente. Colocamos el script al final del <body> para
+        evitar ralentizar mucho el tiempo de carga*@
+    <script type="text/javascript">
+    function validate() {
+        validateTermsAndCond()
+        validateEmailFormat();
+        validatePasswordConfirm();
+    }
+
+    @*Terminos y condiciones*@
+    function validateTermsAndCond() {
+        var checkbox =  $('#TermsAndCond').val();
+        if (checkbox.is(":checked"))  {
+            alert('Debe aceptar los términos y condiciones');
+        }
+    }
+
+    @*Formato de email con expresión regular*@
+    function validateEmailFormat() {
+        var regex = /^([\w-\.]+)@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        var email = $('#Email').val();
+        if (email.length > 0 && !regex.test(email)) {
+            alert('Email inválido');
+        }
+    }
+
+    @*Confirmación de contraseña*@
+    function validatePasswordConfirm() {
+        var Password = $('#Password').val();
+        var PasswordConfirm = $('#PasswordConfirm').val();
+        if (PasswordConfirm.localeCompare(Password) != 0) {
+            alert("Falló la confirmación de la contraseña");
+        }
+    };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

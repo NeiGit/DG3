@@ -1,0 +1,106 @@
+﻿@model DieteticaG3.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<h1>Login</h1>
+
+
+<html lang="en"
+<head>
+    <title>Prueba 1 dietetica</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+
+    <link rel="stylesheet" href="~/Content/animate.css">
+    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Content/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/aos.css">
+    <link rel="stylesheet" href="~/Content/ionicons.min.css">
+    <link rel="stylesheet" href="~/Content/flaticon.css">
+    <link rel="stylesheet" href="~/Content/icomoon.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/flaticon.css" />
+
+   
+
+                    
+
+
+</head>
+
+<body>
+
+    <div class="login-item" style=background-image: src="~/Images/Pictures/ambiente.jpg" />
+    <img style=background-image: src="~/Images/Pictures/ambiente.jpg" />
+    <div class="overlay"></div>
+    <div class="container" />
+        <div class="login-form" />
+
+        <br />
+
+        <fieldset>
+            
+
+            @using (Html.BeginForm("Login", "Clientes", FormMethod.Post))
+            {
+                <table>
+                    <hb>
+
+
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-wrapper">
+                                        <label for="">Dni</label>
+                                        @Html.TextBoxFor(m => m.Dni)
+                                    </div>
+                                    </div>
+
+                            </td>
+                      
+                        </tr>
+                        <hb>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    @Html.ValidationMessageFor(m => m.Dni, null, new { @class = "text text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    <div class="form-group">
+                                        <div class="form-wrapper">
+                                            <label for="">Password</label>
+                                            @Html.PasswordFor(m => m.Password)
+                                            <div id="password_error" class="validation_error"></div>
+                                </td>
+                            
+                            </tr>
+                            <tr>
+        
+                                <td>
+                                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" value="Login" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.ValidationMessage("Error", null, new { @class = "text text-danger" })
+                                </td>
+                            </tr>
+                </table>
+            }
+
+        </fieldset>
+
+
+</body>
+</html>

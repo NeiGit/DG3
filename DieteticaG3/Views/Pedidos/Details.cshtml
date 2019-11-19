@@ -1,0 +1,78 @@
+﻿@model DieteticaG3.Models.PedidoModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Pedido</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.numPed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numPed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PedFec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PedFec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioTotal)
+        </dd>
+
+    </dl>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Producto
+        </th>
+        <th>
+            Precio unitario
+        </th>
+        <th>
+            Cantidad
+        </th>
+        <th>
+            Total
+        </th>
+    </tr>
+    @if (ViewBag.detalles != null)
+    {
+        foreach (DieteticaG3.Models.DetalleViewModel detalleModel in ViewBag.detalles)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => detalleModel.productoNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => detalleModel.precioUnitario)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => detalleModel.cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => detalleModel.totalDetalle)
+                </td>
+            </tr>
+        }
+    }
+</table>
+<p>
+    @Html.ActionLink("Volver", "Index")
+</p>
